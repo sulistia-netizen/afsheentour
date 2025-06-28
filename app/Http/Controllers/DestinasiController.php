@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Destinasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
@@ -37,13 +38,22 @@ class DestinasiController extends Controller
                     return 'No Image';
                 })
                 ->addColumn('action', function ($row) {
-                    $viewBtn = '<a href="' . route('destinasis.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
-                    $editBtn = '<a href="' . route('destinasis.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
-                    $deleteBtn = '<form action="' . route('destinasis.destroy', $row->id) . '" method="POST" style="display:inline;">
+                    $viewBtn = $editBtn = $deleteBtn = '';
+                    
+                    if (Auth::user() && Auth::user()->can('destinasi-list')) {
+                        $viewBtn = '<a href="' . route('destinasis.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
+                    }
+                    if (Auth::user() && Auth::user()->can('destinasi-edit')) {
+                        $editBtn = '<a href="' . route('destinasis.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
+                    }
+
+                    if (Auth::user() && Auth::user()->can('destinasi-delete')) {
+                        $deleteBtn = '<form action="' . route('destinasis.destroy', $row->id) . '" method="POST" style="display:inline;">
                                     ' . csrf_field() . '
                                     ' . method_field('DELETE') . '
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
                                   </form>';
+                    }
                     return $viewBtn . ' ' . $editBtn . ' ' . $deleteBtn;
                 })
                 ->rawColumns(['gambar', 'action']) // Tambahkan 'gambar' agar bisa dirender
@@ -138,7 +148,7 @@ class DestinasiController extends Controller
             if ($destinasi->gambar && Storage::exists('/' . $destinasi->gambar)) {
                 Storage::delete('/' . $destinasi->gambar);
             }
-            
+
             $file = $request->file('gambar');
             $extension = $file->getClientOriginalExtension();
 

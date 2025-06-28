@@ -3,20 +3,22 @@
     <div class="container">
         <div class="card mt-5">
             <h3 class="card-header p-3">Table Destinasis</h3>
-            <a href="{{ route('destinasis.create') }}" class="btn btn-success">Create Destinasi</a>
+            @can('destinasi-create')
+                <a href="{{ route('destinasis.create') }}" class="btn btn-success">Create Destinasi</a>
+            @endcan
 
             <div class="card-body">
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>nama</th>
-                            <th>deskripsi</th>
-                            <th>gambar</th>
-                            <th>harga</th>
-                            <th>jumlah jam</th>
-                            <th>latitude</th>
-                            <th>longitude</th>
+                            <th>Nama</th>
+                            <th>Deskripsi</th>
+                            <th>Gambar</th>
+                            <th>Harga</th>
+                            <th>Jumlah Jam</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
                             <th>is_hotel</th>
                             <th width="100px">Action</th>
                         </tr>

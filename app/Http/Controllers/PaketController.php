@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use App\Models\Paket;
 use App\Models\Transportasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
@@ -39,14 +40,24 @@ class PaketController extends Controller
                     return 'No Image';
                 })
                 ->addColumn('action', function ($row) {
+                     $viewBtn = $editBtn = $deleteBtn = '';
+
+                if (Auth::user() && Auth::user()->can('paket-edit')) {
                     $viewBtn = '<a href="' . route('pakets.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
+                    }
+
+                if (Auth::user() && Auth::user()->can('paket-edit')) {
                     $editBtn = '<a href="' . route('pakets.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
+                }
+
+                if (Auth::user() && Auth::user()->can('paket-edit')) {
                     $deleteBtn = '<form action="' . route('pakets.destroy', $row->id) . '" method="POST" style="display:inline;">
                                 ' . csrf_field() . '
                                 ' . method_field('DELETE') . '
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
                             </form>';
-    
+                }
+
                         return $viewBtn . ' ' . $editBtn . ' ' . $deleteBtn;
                     })
                     ->rawColumns(['gambar', 'action'])
@@ -70,6 +81,7 @@ class PaketController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'nama' => 'required',
             'deskripsi' => 'required',
@@ -80,8 +92,8 @@ class PaketController extends Controller
             'is_ai' => 'required',
             'id_hotel' =>'required',
             'id_transportasi' => 'required',
-            'tanggal_mulai' => 'tanggal_mulai',
-            'tanggal_selesai' => 'tanggal_selesai',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
         ]);
 
         $input = $request->all();
@@ -137,8 +149,8 @@ class PaketController extends Controller
             'is_ai' => 'required',
             'id_hotel' =>'required',
             'id_transportasi' => 'required',
-            'tanggal_mulai' => 'tanggal_mulai',
-            'tanggal_selesai' => 'tanggal_selesai',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
         ]);
         $input = $request->all();
         if ($request->hasFile('gambar')) {

@@ -11,12 +11,13 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>ID User:</strong>
-            {{ $ulasan->id_user}}
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>ID User:</strong>
+                {{ $ulasan->id_user }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -24,6 +25,7 @@
                 {{ $ulasan->id_paket }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -31,6 +33,7 @@
                 {{ $ulasan->rating }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">

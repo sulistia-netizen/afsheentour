@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Mail;
 use App\Mail\BookingConfirmationMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Booking;
 use App\Models\DetailPaket;
 use App\Models\User;
@@ -48,25 +48,24 @@ class BookingController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $user = Auth::user();
                     $buttons = '<div class="btn-group" role="group" style="flex-wrap: wrap;">';
 
-                    if ($user && $user->can('booking-list')) {
+                    if (Auth::user() && Auth::user()->can('booking-list')) {
                         $buttons .= '<a href="' . route('bookings.show', $row->id) . '" class="btn btn-sm btn-primary me-1 mb-1">View</a>';
                     }
 
-                    if ($user && $user->can('booking-edit')) {
+                    if (Auth::user() && Auth::user()->can('booking-edit')) {
                         $buttons .= '<a href="' . route('bookings.edit', $row->id) . '" class="btn btn-sm btn-warning me-1 mb-1">Edit</a>';
                     }
 
-                    if ($user && $user->can('booking-delete')) {
+                    if (Auth::user() && Auth::user()->can('booking-delete')) {
                         $buttons .= '<form action="' . route('bookings.destroy', $row->id) . '" method="POST" style="display:inline;">
                                 ' . csrf_field() . method_field('DELETE') . '
                                 <button type="submit" class="btn btn-sm btn-danger me-1 mb-1" onclick="return confirm(\'Yakin hapus?\')">Delete</button>
                             </form>';
                     }
 
-                    if ($user && $user->can('booking-edit')) {
+                    if (Auth::user() && Auth::user()->can('booking-edit')) {
                         if ($row->status !== 'berhasil') {
                             $buttons .= '<form action="' . route('konfirmasi.booking', $row->id) . '" method="POST" style="display:inline;">
                                     ' . csrf_field() . '
@@ -181,17 +180,17 @@ class BookingController extends Controller
     public function confirm($id)
     {
         $booking = Booking::with('user')->findOrFail($id);
-        dd($booking);
-        // $booking->update([
-        //     'status' => 'berhasil',
-        // ]);
+        // dd($booking);
 
-        // // Kirim email ke user
-        // if ($booking->user && $booking->user->email) {
-        //     Mail::to($booking->user->email)->send(new BookingConfirmationMail($booking));
-        // }
+        // Kirim email ke user
+        if ($booking->user && $booking->user->email) {
+            Mail::to($booking->user->email)->send(new BookingConfirmationMail($booking));
+        }
 
+        $booking->update([
+            'status' => 'berhasil',
+        ]);
 
-        // return redirect()->route('bookings.index')->with('message', 'Booking berhasil dikonfirmasi!');
+        return redirect()->route('bookings.index')->with('message', 'Booking berhasil dikonfirmasi!');
     }
 }

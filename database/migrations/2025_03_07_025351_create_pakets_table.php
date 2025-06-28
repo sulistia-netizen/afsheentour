@@ -22,6 +22,8 @@ return new class extends Migration
             $table->boolean("is_ai");
             $table->integer("id_hotel");
             $table->integer("id_transportasi");
+            $table->string("tanggal_mulai");
+            $table->string("tanggal_selesai");
             $table->unsignedBigInteger("created_by")->nullable();
             $table->unsignedBigInteger("updated_by")->nullable();
             $table->unsignedBigInteger("deleted_by")->nullable();

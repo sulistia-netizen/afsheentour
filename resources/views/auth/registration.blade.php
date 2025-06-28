@@ -1,6 +1,20 @@
 @extends('auth.layout')
 @section('content')
     <div class="container-fluid">
+
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your
+                input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-sm-12">
                 <form class="md-float-material form-material" action="{{ route('register.post') }}" method="POST"
@@ -17,25 +31,44 @@
                                 </div>
                             </div>
                             <div class="form-group form-primary">
-                                <input type="text" name="name" class="form-control" required="">
+                                <input type="text" name="nama" class="form-control" required>
                                 <span class="form-bar"></span>
-                                <label class="float-label">Choose Username</label>
+                                <label class="float-label">Nama</label>
                             </div>
                             <div class="form-group form-primary">
-                                <input type="text" name="email" class="form-control" required="">
+                                <select name="jenis_kelamin" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group form-primary">
+                                <input type="number" name="nomor_hp" class="form-control" required>
                                 <span class="form-bar"></span>
-                                <label class="float-label">Your Email Address</label>
+                                <label class="float-label">Nomor HP</label>
+                            </div>
+
+                            <div class="form-group form-primary">
+                                <input type="email" name="alamat_email" class="form-control" required>
+                                <span class="form-bar"></span>
+                                <label class="float-label">Alamat Email</label>
                             </div>
                             <div class="form-group form-primary">
-                                <input type="password" name="password" class="form-control" required="">
+                                <input type="password" name="password" class="form-control" required>
                                 <span class="form-bar"></span>
                                 <label class="float-label">Password</label>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="password" name="confirm_password" class="form-control" required>
+                                <span class="form-bar"></span>
+                                <label class="float-label">Confirm Password</label>
                             </div>
                             <div class="row m-t-25 text-left">
                                 {{-- <div class="col-md-12">
                                     <div class="checkbox-fade fade-in-primary">
                                         <label>
-                                            <input type="checkbox" value="">
+                                            <input type="checkbox" value>
                                             <span class="cr"><i
                                                     class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
                                             <span class="text-inverse">I read and accept <a href="#">Terms &amp;
@@ -46,7 +79,7 @@
                                 {{-- <div class="col-md-12">
                                     <div class="checkbox-fade fade-in-primary">
                                         <label>
-                                            <input type="checkbox" value="">
+                                            <input type="checkbox" value>
                                             <span class="cr"><i
                                                     class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
                                             <span class="text-inverse">Send me the <a href="#!">Newsletter</a>

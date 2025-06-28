@@ -3,17 +3,19 @@
     <div class="container">
         <div class="card mt-5">
             <h3 class="card-header p-3">Table Hotel</h3>
-            <a href="{{ route('hotels.create') }}" class="btn btn-success">Create Hotel</a>
+            @can('hotel-create')
+                <a href="{{ route('hotels.create') }}" class="btn btn-success">Create Hotel</a>
+            @endcan
             <div class="card-body">
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>nama_hotel</th>
-                            <th>latitude</th>
-                            <th>longitude</th>
-                            <th>harga</th>
-                            <th>keterangan</th>
+                            <th>Nama Hotel</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th>Harga</th>
+                            <th>Keterangan</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
@@ -36,9 +38,9 @@
                 serverSide: true,
                 ajax: "{{ route('hotels.index') }}",
                 columns: [{
-                    data: 'id',
+                        data: 'id',
                         name: 'id'
-                },
+                    },
                     {
                         data: 'nama_hotel',
                         name: 'nama_hotel'

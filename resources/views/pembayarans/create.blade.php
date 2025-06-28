@@ -34,9 +34,9 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>ID Booking:</strong>
+                    <strong>Booking:</strong>
                     <select name="id_booking" class="form-control">
-                        <option selected>ID Booking</option>
+                        <option selected>Booking</option>
                         @foreach ($bookings as $booking)
                             <option value="{{ $booking['id'] }}">{{ $booking->user->name ?? 'N\A' }}</option>
                         @endforeach

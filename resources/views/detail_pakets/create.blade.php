@@ -55,28 +55,26 @@
                     <input type="text" name="jam_selesai" class="form-control" placeholder="jam_selesai">
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>ID Destinasi:</strong><br>
-                    @foreach ($destinasis as $destinasi)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="id_destinasi[]"
-                                value="{{ $destinasi->id }}" id="destinasi{{ $destinasi->id }}">
-                            <label class="form-check-label" for="destinasi{{ $destinasi->id }}">
-                                {{ $destinasi->nama }}
-                            </label>
-                        </div>
-                    @endforeach
+                    <strong>ID Destinasi:</strong>
+                    <select name="id_destinasi" class="form-control">
+                        <option selected disabled>Pilih Destinasi</option>
+                        @foreach ($destinasis as $destinasi)
+                            <option value="{{ $destinasi['id'] }}">{{ $destinasi['nama'] }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>ID Transportasi:</strong>
                     <select name="id_transportasi" class="form-control">
                         <option selected disabled>Pilih Transportasi</option>
                         @foreach ($transportasis as $transportasi)
-                            <option value="{{ $transportasi['id'] }}">{{ $transportasi['nama'] }}</option>
+                            <option value="{{ $transportasi['id'] }}">{{ $transportasi['jenis'] }}</option>
                         @endforeach
                     </select>
                 </div>

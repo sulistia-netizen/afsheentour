@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class HotelController extends Controller
@@ -31,16 +32,25 @@ class HotelController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
+                          $viewBtn = $editBtn = $deleteBtn = '';
+
+                    if (Auth::user() && Auth::user()->can('hotel-list')) {
                         $viewBtn = '<a href="' . route('hotels.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
+                    }
+
+                    if (Auth::user() && Auth::user()->can('hotel-edit')) {
                         $editBtn = '<a href="' . route('hotels.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
-    
+                     }
+
+                    if (Auth::user() && Auth::user()->can('hotel-edit')) {
                         // Form untuk delete
                         $deleteBtn = '<form action="' . route('hotels.destroy', $row->id) . '" method="POST" style="display:inline;">
                                         ' . csrf_field() . '
                                         ' . method_field('DELETE') . '
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
                                       </form>';
-    
+                    }
+                    
                         return $viewBtn . ' ' . $editBtn . ' ' . $deleteBtn;
                     })
                     ->rawColumns(['action'])

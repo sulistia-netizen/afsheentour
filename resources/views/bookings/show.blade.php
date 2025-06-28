@@ -17,12 +17,14 @@
                 {{ $booking->id_user }}
             </div>
         </div>
+    </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>ID Paket:</strong>
             {{ $booking->id_paket }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">

@@ -11,12 +11,13 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Nama:</strong>
-            {{ $transportasi->nama }}
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Nama:</strong>
+                {{ $transportasi->nama }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -24,6 +25,7 @@
                 {{ $transportasi->jumlah_penumpang }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -31,13 +33,15 @@
                 {{ $transportasi->menit_per_km_luar_kota }}
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Menit per KM Dalam Kota:</strong>
-                    {{ $transportasi->menit_per_km_dalam_kota }}
-                </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Menit per KM Dalam Kota:</strong>
+                {{ $transportasi->menit_per_km_dalam_kota }}
             </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">

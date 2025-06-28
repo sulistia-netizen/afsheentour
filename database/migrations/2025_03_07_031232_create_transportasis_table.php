@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string("jenis");
             $table->integer("biaya_per_km");
             $table->integer("jumlah_penumpang");
-            $table->integer("kecepatan");
+            $table->float("menit_per_km_luar_kota");
+            $table->float("menit_per_km_dalam_kota");
             $table->unsignedBigInteger("created_by")->nullable();
             $table->unsignedBigInteger("updated_by")->nullable();
             $table->unsignedBigInteger("deleted_by")->nullable();

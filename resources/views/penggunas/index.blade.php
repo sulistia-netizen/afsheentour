@@ -3,17 +3,19 @@
     <div class="container">
         <div class="card mt-5">
             <h3 class="card-header p-3">Table Pengguna</h3>
-            <a href="{{ route('penggunas.create') }}" class="btn btn-success">Create Pengguna</a>
+            @can('pengguna-create')
+                <a href="{{ route('penggunas.create') }}" class="btn btn-success">Create Pengguna</a>
+            @endcan
             <div class="card-body">
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>nama</th>
-                            <th>jenis_kelamin</th>
-                            <th>nomor_hp</th>
-                            <th>alamat_email</th>
-                            <th>roles</th>
+                            <th>Nama</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Nomor HP</th>
+                            <th>Aalamt Email</th>
+                            <th>Roles</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
@@ -36,9 +38,9 @@
                 serverSide: true,
                 ajax: "{{ route('penggunas.index') }}",
                 columns: [{
-                    data: 'id',
+                        data: 'id',
                         name: 'id'
-                },
+                    },
                     {
                         data: 'nama',
                         name: 'nama'

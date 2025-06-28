@@ -16,13 +16,14 @@
                 </div>
             </div>
             <a href="index.html">
-                <img class="img-fluid" src="/admin/assets/images/logo-afsheen.png" style="height:100px" alt="Theme-Logo" />
+                <img class="img-fluid" src="/admin/assets/images/logo-afsheen.png" style="height:100px"
+                    alt="Theme-Logo" />
             </a>
             <a class="mobile-options waves-effect waves-light">
                 <i class="ti-more"></i>
             </a>
         </div>
-      
+
         <div class="navbar-container container-fluid">
             <ul class="nav-left">
                 <li>
@@ -56,7 +57,8 @@
                         </li>
                         <li class="waves-effect waves-light">
                             <div class="media">
-                                <img class="d-flex align-self-center img-radius" src="/admin/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                <img class="d-flex align-self-center img-radius" src="/admin/assets/images/avatar-2.jpg"
+                                    alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="notification-user">Admin</h5>
                                     <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -66,7 +68,8 @@
                         </li>
                         <li class="waves-effect waves-light">
                             <div class="media">
-                                <img class="d-flex align-self-center img-radius" src="/admin/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                <img class="d-flex align-self-center img-radius" src="/admin/assets/images/avatar-4.jpg"
+                                    alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="notification-user">Joseph William</h5>
                                     <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -76,7 +79,8 @@
                         </li>
                         <li class="waves-effect waves-light">
                             <div class="media">
-                                <img class="d-flex align-self-center img-radius" src="/admin/assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                                <img class="d-flex align-self-center img-radius" src="/admin/assets/images/avatar-3.jpg"
+                                    alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="notification-user">Sara Soudein</h5>
                                     <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -89,34 +93,27 @@
                 <li class="user-profile header-notification">
                     <a href="#!" class="waves-effect waves-light">
                         <img src="/admin/assets/images/image-login.png" class="img-radius" alt="image-login.png">
-                        <span>Admin</span>
+                        @auth
+                            <span>{{ auth()->user()->name }}</span>
+                        @endauth
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
                         <li class="waves-effect waves-light">
                             <a href="#!">
-                                <i class="ti-settings"></i> Settings
-                            </a>
-                        </li>
+
+                        
                         <li class="waves-effect waves-light">
-                            <a href="user-profile.html">
-                                <i class="ti-user"></i> Profile
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
+
+                            <a href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
                             </a>
-                        </li>
-                        <li class="waves-effect waves-light">
-                            <a href="email-inbox.html">
-                                <i class="ti-email"></i> My Messages
-                            </a>
-                        </li>
-                        <li class="waves-effect waves-light">
-                            <a href="auth-lock-screen.html">
-                                <i class="ti-lock"></i> Lock Screen
-                            </a>
-                        </li>
-                        <li class="waves-effect waves-light">
-                            <a href="auth-normal-sign-in.html">
-                                <i class="ti-layout-sidebar-left"></i> Logout
-                            </a>
+
                         </li>
                     </ul>
                 </li>

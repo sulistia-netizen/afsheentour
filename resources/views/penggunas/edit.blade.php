@@ -45,13 +45,6 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Jenis Kelamin:</strong>
-                    <input type="text" name="jenis_kelamin" value="{{ $pengguna->jenis_kelamin }}" class="form-control"
-                        placeholder="jenis_kelamin">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
                     <strong>Nomor HP:</strong>
                     <input type="text" name="nomor_hp" value="{{ $pengguna->nomor_hp }}" class="form-control"
                         placeholder="nomor_hp">

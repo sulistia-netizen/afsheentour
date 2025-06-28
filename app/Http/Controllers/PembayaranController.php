@@ -35,16 +35,25 @@ class PembayaranController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $viewBtn = '<a href="' . route('pembayarans.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
-                    $editBtn = '<a href="' . route('pembayarans.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
+                    $viewBtn = $editBtn = $deleteBtn = '';
 
+                if (Auth::user() && Auth::user()->can('pembayaran-list')) {
+                    $viewBtn = '<a href="' . route('pembayarans.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
+                }
+
+                if (Auth::user() && Auth::user()->can('pembayaran-list')) {
+                    $editBtn = '<a href="' . route('pembayarans.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
+                }
+
+                if (Auth::user() && Auth::user()->can('pembayaran-list')) {
                     // Form untuk delete
                     $deleteBtn = '<form action="' . route('pembayarans.destroy', $row->id) . '" method="POST" style="display:inline;">
                                         ' . csrf_field() . '
                                         ' . method_field('DELETE') . '
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
                                       </form>';
-
+                }
+                
                     return $viewBtn . ' ' . $editBtn . ' ' . $deleteBtn;
                 })->addColumn('user', function ($row) {
                     return $row->booking->user->name ?? 'NULL';
@@ -61,7 +70,8 @@ class PembayaranController extends Controller
     public function create()
     {
         $bookings = Booking::all();
-        return view('pembayarans.create', compact('bookings'));
+        $pakets = Paket::all();
+        return view('pembayarans.create', compact('bookings', 'pakets'));
     }
 
     /**

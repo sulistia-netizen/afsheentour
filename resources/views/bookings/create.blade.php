@@ -49,35 +49,35 @@
                         </select>
                     </div>
                 </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Jumlah Orang:</strong>
-                    <input type="text" name="jumlah_orang" class="form-control" placeholder="jumlah_orang">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Jumlah Orang:</strong>
+                        <input type="text" name="jumlah_orang" class="form-control" placeholder="jumlah_orang">
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Tanggal Mulai:</strong>
-                    <input type="text" name="tanggal_mulai" class="form-control" placeholder="tanggal_mulai">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Tanggal Mulai:</strong>
+                        <input type="text" name="tanggal_mulai" class="form-control" placeholder="tanggal_mulai">
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Jumlah Biaya:</strong>
-                    <input type="text" name="jumlah_biaya" class="form-control" placeholder="jumlah_biaya">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Jumlah Biaya:</strong>
+                        <input type="text" name="jumlah_biaya" class="form-control" placeholder="jumlah_biaya">
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Status:</strong>
-                    <input type="text" name="status" class="form-control" placeholder="status">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Status:</strong>
+                        <input type="text" name="status" class="form-control" placeholder="status">
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </div>
             </div>
-        </div>
     </form>
 @endsection

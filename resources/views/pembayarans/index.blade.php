@@ -3,15 +3,17 @@
     <div class="container">
         <div class="card mt-5">
             <h3 class="card-header p-3">Table Pembayarans</h3>
-            <a href="{{ route('pembayarans.create') }}" class="btn btn-success">Create Pembayaran</a>
+            @can('pembayaran-create')
+                <a href="{{ route('pembayarans.create') }}" class="btn btn-success">Create Pembayaran</a>
+            @endcan
             <div class="card-body">
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Pembooking</th>
-                            <th>metode_pembayaran</th>
-                            <th>nilai</th>
+                            <th>Metode Pembayaran</th>
+                            <th>Nilai</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>

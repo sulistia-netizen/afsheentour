@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Paket;
 use App\Models\Destinasi;
@@ -55,45 +56,79 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $credentials = $request->only(
-            'email',
-            'password'
-        );
-
-        // $user = User::all();
-        // dd($user);
-
-        // dd(Auth::attempt($credentials));
-        // dd([
-        //     'credentials' => $credentials,
-        //     'user' => \App\Models\User::where('email', $credentials['email'])->first(),
-        // ]);
-
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
-                ->withSuccess('You have Successfully loggedin');
+            $user = Auth::user(); // ✅ baru boleh dipanggil di sini
+
+            // Cek role
+            if ($user->hasRole('Admin')) {
+                return redirect()->intended('dashboard')->withSuccess('Berhasil login sebagai Admin');
+            } elseif ($user->hasRole('User')) {
+                return redirect()->route('landing')->withSuccess('Berhasil login sebagai User');
+            } else {
+                return redirect()->intended('login')->with('warning', 'Anda tidak memiliki role yang dikenali.');
+            }
         }
-        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
+
+        return redirect("login")->withErrors('Email atau password salah.');
     }
+
     /**
      * Write code on Method
      *
      * @return response()
      */
     public function postRegistration(Request $request)
+
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'nomor_hp' => 'required',
+            'alamat_email' => 'required',
+            'password' => 'required|same:confirm_password',
+
+        ]);
+        // dd($request->all());
+
+        $input = $request->all();
+
+        $pengguna = Pengguna::create([
+            'nama' => $input['nama'],
+            'jenis_kelamin' => $input['jenis_kelamin'],
+            'nomor_hp' => $input['nomor_hp'],
+            'alamat_email' => $input['alamat_email'],
+
         ]);
 
+        // dd($pengguna);
 
-        $data = $request->all();
-        $check = $this->create($data);
-        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+        $user = User::create([
+            'pengguna_id' => $pengguna->id,
+            'name' => $pengguna->nama,
+            'email' => $pengguna->alamat_email,
+            'password' => Hash::make($input['password'])
+        ]);
+
+        $user->assignRole('User');
+
+        return redirect("login")->withSuccess('Great! You have Successfully logged in');
     }
+
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|email|unique:users',
+    //         'password' => 'required|min:6',
+    //     ]);
+
+
+    //     $data = $request->all();
+    //     $check = $this->create($data);
+    //     $check->assignRole('User');
+    //     return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+    // }
     /**
      * Write code on Method
      *
@@ -166,7 +201,8 @@ class AuthController extends Controller
 
     public function hasil(Request $request)
     {
-        // dd($request->all());
+        $user = Auth::user()->load('pengguna');
+
         $data_tempat_wisata = Destinasi::all();
         // dd($data_tempat_wisata);
         $tempat_wisata = [];
@@ -292,21 +328,25 @@ class AuthController extends Controller
         $koordinat_palembang = [-2.990934, 104.756554];
         $budget_total = 0;
 
-        $paket = Paket::create(
-            [
-                "nama" => "Paket Hasil AI" . ($tanggal_mulai->format('Y-m-d')) . " s/d " . ($tanggal_selesai->format('Y-m-d')),
-                "deskripsi" => "-",
-                "jumlah_orang" => $jumlah_orang,
-                "harga" => 0,
-                "durasi" => $jumlah_hari,
-                "gambar" => "",
-                "id_hotel" => $hotel_terpilih['id'],
-                "id_transportasi" => $transportasi_terpilih['id'],
-                "is_ai" => true,
-                'tanggal_mulai' => $tanggal_mulai->format('d-M-Y'),
-                'tanggal_selesai' => $tanggal_selesai->format('d-M-Y'),
-            ]
-        );
+        $kode_unik = strtoupper(Str::random(5));
+        $jumlah_paket = \App\Models\Paket::count() + 1;
+
+        $nama_paket = "Paket AI #$jumlah_paket | $kode_unik | " .
+            $tanggal_mulai->format('d') . '-' . $tanggal_selesai->format('d M');
+
+        $paket = Paket::create([
+            "nama" => $nama_paket, // ← pakai variabel hasil di atas
+            "deskripsi" => "-",
+            "jumlah_orang" => $jumlah_orang,
+            "harga" => 0,
+            "durasi" => $jumlah_hari,
+            "gambar" => "",
+            "id_hotel" => $hotel_terpilih['id'],
+            "id_transportasi" => $transportasi_terpilih['id'],
+            "is_ai" => true,
+            'tanggal_mulai' => $tanggal_mulai->format('d-M-Y'),
+            'tanggal_selesai' => $tanggal_selesai->format('d-M-Y'),
+        ]);
 
         // dd($paket);
 
@@ -369,11 +409,11 @@ class AuthController extends Controller
         );
 
 
-        // dd($paket);
+        // dd($paket->detail_paket);
         // echo $jumlah_hari .'</br>';
         // echo "ini hasil";
         // dd($itinerary_akhir);
-        return view('landing.ga', compact('itinerary_akhir', 'best_chromosome', 'paket'));
+        return view('landing.ga', compact('itinerary_akhir', 'best_chromosome', 'paket', 'user'));
     }
 
     function generate_chromosome_dinamis($tempat_wisata, $jumlah_hari, $data_hotel, $data_transportasi, $jumlah_penumpang = 15, $waktu_maks_per_hari = 600)
@@ -384,6 +424,8 @@ class AuthController extends Controller
         $idxs_hotel = range(0, count($data_hotel) - 1);
         shuffle($idxs_hotel);
         $hotel_terpilih = $data_hotel[$idxs_hotel[0]];
+
+        // dd($data_transportasi);
 
         $transportasi_filtered = array_values(array_filter($data_transportasi, function ($t) use ($jumlah_penumpang) {
             return $t["jumlah_penumpang"] > $jumlah_penumpang;

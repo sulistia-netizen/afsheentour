@@ -11,12 +11,13 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>ID Paket:</strong>
-            {{ $detail_paket->id_paket }}
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>ID Paket:</strong>
+                {{ $detail_paket->id_paket }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -24,26 +25,30 @@
                 {{ $detail_paket->jam_mulai }}
             </div>
         </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Jam Selesai:</strong>
-                {{ $detail_paket->jam_selesai }}
-            </div>
-        </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>ID Destinasi:</strong>
-                {{ $detail_paket->id_destinasi }}
-            </div>
-        </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>ID Transportasi:</strong>
-                {{ $detail_paket->id_destinasi }}
-            </div>
-        </div>
     </div>
-@endsection
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Jam Selesai:</strong>
+                    {{ $detail_paket->jam_selesai }}
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>ID Destinasi:</strong>
+                        {{ $detail_paket->id_destinasi }}
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>ID Transportasi:</strong>
+                            {{ $detail_paket->id_destinasi }}
+                        </div>
+                    </div>
+                </div>
+                </div>
+            @endsection

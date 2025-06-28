@@ -28,8 +28,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Jenis:</strong>
-                    <input type="text" name="jenis" class="form-control" placeholder="Jenis">
+                    <strong>Nama:</strong>
+                    <input type="text" name="nama" class="form-control" placeholder="nama">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

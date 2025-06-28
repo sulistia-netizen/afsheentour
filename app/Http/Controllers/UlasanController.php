@@ -6,6 +6,7 @@ use App\Models\Ulasan;
 use App\Models\User;
 use App\Models\Paket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class UlasanController extends Controller
@@ -33,17 +34,24 @@ class UlasanController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-       
+
+                    if (Auth::user() && Auth::user()->can('ulasan-list')) {
                         $viewBtn = '<a href="' . route('ulasans.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
+                    }
+
+                    if (Auth::user() && Auth::user()->can('ulasan-list')) {
                         $editBtn = '<a href="' . route('ulasans.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
+                    }
     
+                    if (Auth::user() && Auth::user()->can('ulasan-list')) {
                         // Form untuk delete
                         $deleteBtn = '<form action="' . route('ulasans.destroy', $row->id) . '" method="POST" style="display:inline;">
                                         ' . csrf_field() . '
                                         ' . method_field('DELETE') . '
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
                                       </form>';
-    
+                    }
+
                         return $viewBtn . ' ' . $editBtn . ' ' . $deleteBtn;
                     })
                     ->addColumn('user',function($row){

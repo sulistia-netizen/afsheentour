@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transportasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class TransportasiController extends Controller
@@ -30,16 +31,25 @@ class TransportasiController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
+                        $viewBtn = $editBtn = $deleteBtn = '';
+
+                    if (Auth::user() && Auth::user()->can('destinasi-list')) {
                         $viewBtn = '<a href="' . route('transportasis.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
+                    }
+
+                    if (Auth::user() && Auth::user()->can('destinasi-list')) {
                         $editBtn = '<a href="' . route('transportasis.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
+                    }
     
+                    if (Auth::user() && Auth::user()->can('destinasi-list')) {
                         // Form untuk delete
                         $deleteBtn = '<form action="' . route('transportasis.destroy', $row->id) . '" method="POST" style="display:inline;">
                                         ' . csrf_field() . '
                                         ' . method_field('DELETE') . '
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
                                       </form>';
-    
+                    }
+                    
                         return $viewBtn . ' ' . $editBtn . ' ' . $deleteBtn;
                     })
                     ->rawColumns(['action'])
@@ -65,7 +75,8 @@ class TransportasiController extends Controller
         $request->validate([
             'nama' => 'required',
             'jumlah_penumpang' => 'required',
-            'kecepatan' => 'required',
+            'menit_per_km_luar_kota' => 'required',
+            'menit_per_km_dalam_kota' => 'required',
             'biaya_per_km' => 'required',
         ]);
 
@@ -98,7 +109,8 @@ class TransportasiController extends Controller
         $request->validate([
             'nama' => 'required',
             'jumlah_penumpang' => 'required',
-            'kecepatan' => 'required',
+            'menit_per_km_luar_kota' => 'required',
+            'menit_per_km_dalam_kota' => 'required',
             'biaya_per_km' => 'required',
         ]);
 

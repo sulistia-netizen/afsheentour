@@ -81,17 +81,48 @@
                         <a href="#afsheen-tour" class="nav-item nav-link">About</a>
                         <a href="#services" class="nav-item nav-link">Layanan</a>
                         <a href="#packages" class="nav-item nav-link">Paket Tour</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Halaman</a>
-                            <div class="dropdown-menu border-0 rounded-0 m-0">
-                                <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                                <a href="single.html" class="dropdown-item">Blog Detail</a>
-                                <a href="destination.html" class="dropdown-item">Destinasi</a>
-                                <a href="guide.html" class="dropdown-item">Travel Guides</a>
-                                <a href="{{ route('testimonial.index') }}" class="dropdown-item">Testimonial</a>
+                        <a href="#testimonial" class="nav-item nav-link">Testimonial</a>
+                        <!-- Tombol Login/Logout -->
+                        @guest
+                            <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+                        @endguest
+
+                        @auth
+                            <a href="{{ route('logout') }}" class="nav-item nav-link"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endauth
+
+                        {{-- @guest
+                            <!-- Tampil jika belum login -->
+                            <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+                        @endguest
+
+                        @auth
+                            <!-- Tampil jika sudah login -->
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+
+                            <!-- Form Logout tersembunyi -->
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endauth --}}
+
                     </div>
                 </div>
             </nav>
@@ -418,7 +449,7 @@
                             </ul>
                         </div>
 
-                       
+
                     </div>
                     </form>
                 </div>
@@ -433,7 +464,7 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimonial</h6>
+                <h6 id="testimonial" class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimonial</h6>
                 <h1>What Say Our Clients</h1>
             </div>
             <div class="owl-carousel testimonial-carousel">

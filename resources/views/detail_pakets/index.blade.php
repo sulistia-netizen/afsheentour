@@ -5,7 +5,9 @@
         <div class="card mt-5">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3 class="mb-0">Table Detail Paket</h3>
-                <a href="{{ route('detail_pakets.create') }}" class="btn btn-success btn-sm">+ Create Detail Paket</a>
+                @can('detail_paket-create')
+                    <a href="{{ route('detail_pakets.create') }}" class="btn btn-success btn-sm">+ Create Detail Paket</a>
+                @endcan
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped table-hover data-table">

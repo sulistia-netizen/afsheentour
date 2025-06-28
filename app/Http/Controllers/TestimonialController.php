@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Ulasan;
 use App\Models\Paket;
+use App\Models\User;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TestimonialController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware(
-            'permission:testimonial-list|testimonial-create|testimonial-edit|testimonial-delete',
-            ['only' => ['index', 'store']]
-        );
-        $this->middleware('permission:testimonial-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:testimonial-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:testimonial-delete', ['only' => ['destroy']]);
-    }
+    // function __construct()
+    // {
+    //     $this->middleware(
+    //         'permission:testimonial-list|testimonial-create|testimonial-edit|testimonial-delete',
+    //         ['only' => ['index', 'store']]
+    //     );
+    //     $this->middleware('permission:testimonial-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:testimonial-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:testimonial-delete', ['only' => ['destroy']]);
+    // }
 
     public function index()
     {

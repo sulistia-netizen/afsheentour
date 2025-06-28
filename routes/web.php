@@ -17,30 +17,36 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
-Route::post('post-login', [AuthController::class,'postLogin'])->name('login.post');
-Route::get('registration', [AuthController::class,'registration'])->name('register');
-Route::post('post-registration',[AuthController::class, 'postRegistration'])->name('register.post');
-Route::get('dashboard', [AuthController::class,'dashboard'])->name('dashboard');
-Route::get('hasil', [AuthController::class,'hasil'])->name('hasil');
-Route::get('logout', [AuthController::class,'logout'])->name('logout');
-Route::resource('bookings',BookingController::class);
-Route::resource('destinasis',DestinasiController::class);
-Route::resource('detail_pakets',DetailPaketController::class);
-Route::resource('pakets',PaketController::class);
-Route::resource('pembayarans',PembayaranController::class);
-Route::resource('transportasis',TransportasiController::class);
-Route::resource('hotels',HotelController::class);
-Route::resource('ulasans',UlasanController::class);
-Route::resource('penggunas',PenggunaController::class);
-Route::resource('roles',RoleController::class);
-Route::get("/",[AuthController::class,'landing']);
+Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
+Route::get('registration', [AuthController::class, 'registration'])->name('register');
+Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post');
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+Route::get('hasil', [AuthController::class, 'hasil'])->name('hasil');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('post-logout', [AuthController::class, 'postLogout'])->name('logout.post');
+Route::resource('bookings', BookingController::class);
+Route::resource('destinasis', DestinasiController::class);
+Route::resource('detail_pakets', DetailPaketController::class);
+Route::resource('pakets', PaketController::class);
+Route::resource('pembayarans', PembayaranController::class);
+Route::resource('transportasis', TransportasiController::class);
+Route::resource('hotels', HotelController::class);
+Route::resource('ulasans', UlasanController::class);
+Route::resource('penggunas', PenggunaController::class);
+Route::resource('roles', RoleController::class);
+Route::get("/", [AuthController::class, 'landing'])->name('landing');
 Route::get('detail-paket/{id}', [BookingController::class, 'summary'])->name('paket.summary');
 Route::get('/detail_pakets/{detail_paket}', [DetailPaketController::class, 'show'])->name('detail_pakets.show');
 Route::post('/pembayaran_transfer', [PembayaranController::class, 'transfer'])->name('pembayaran.transfer');
 Route::post('/pembayaran_upload', [PembayaranController::class, 'upload'])->name('pembayarans.upload');
 // Rute untuk user (frontend)
-Route::get('/testimonial', [TestimonialController::class, 'index'])->name('testimonial.index');
-Route::post('/testimonial', [TestimonialController::class, 'store'])->middleware('auth')->name('testimonial.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/testimonial', [TestimonialController::class, 'index'])->name('testimonial.index');
+    Route::post('/testimonial', [TestimonialController::class, 'store'])->name('testimonial.store');
+});
+
+
 // Route::post('/konfirmasi-booking', [BookingController::class, 'confirm'])->name('konfirmasi.booking');
 Route::post('/bookings/{id}/confirm', [BookingController::class, 'confirm'])->name('konfirmasi.booking');
 

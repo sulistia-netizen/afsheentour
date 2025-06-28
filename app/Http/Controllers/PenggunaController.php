@@ -6,6 +6,7 @@ use App\Models\Pengguna;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -42,15 +43,24 @@ class PenggunaController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $viewBtn = '<a href="' . route('penggunas.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
-                    $editBtn = '<a href="' . route('penggunas.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
+                    $viewBtn = $editBtn = $deleteBtn = '';
 
-                    // Form untuk delete
-                    $deleteBtn = '<form action="' . route('penggunas.destroy', $row->id) . '" method="POST" style="display:inline;">
+                    if (Auth::user() && Auth::user()->can('pengguna-list')) {
+                        $viewBtn = '<a href="' . route('penggunas.show', $row->id) . '" class="btn btn-primary btn-sm">View</a>';
+                    }
+
+                    if (Auth::user() && Auth::user()->can('pengguna-list')) {
+                        $editBtn = '<a href="' . route('penggunas.edit', $row->id) . '" class="btn btn-warning btn-sm">Edit</a>';
+                    }
+
+                    if (Auth::user() && Auth::user()->can('pengguna-list')) {
+                        // Form untuk delete
+                        $deleteBtn = '<form action="' . route('penggunas.destroy', $row->id) . '" method="POST" style="display:inline;">
                                         ' . csrf_field() . '
                                         ' . method_field('DELETE') . '
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Delete</button>
                                       </form>';
+                    }
 
                     return $viewBtn . ' ' . $editBtn . ' ' . $deleteBtn;
                 })
@@ -141,7 +151,7 @@ class PenggunaController extends Controller
     public function edit(Pengguna $pengguna)
     {
         $roles = Role::pluck('name', 'name')->all();
-        return view('penggunas.edit', compact('pengguna', compact('roles')));
+        return view('penggunas.edit', compact('pengguna', 'roles'));
     }
 
     /**
@@ -149,6 +159,9 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, Pengguna $pengguna)
     {
+        $user = User::findOrFail($pengguna->id);
+        // dd($pengguna->id);
+
         $request->validate([
             'nama' => 'required',
             'jenis_kelamin' => 'required',
@@ -164,8 +177,26 @@ class PenggunaController extends Controller
             $input = Arr::except($input, array('password'));
         }
 
-        $pengguna->update($input);
-        $pengguna->assignRole($request->input('roles'));
+        $pengguna->update([
+            'nama' => $input['nama'],
+            'jenis_kelamin' => $input['jenis_kelamin'],
+            'nomor_hp' => $input['nomor_hp'],
+            'alamat_email' => $input['alamat_email'],
+
+        ]);
+
+        $user->update([
+            'name' => $pengguna->nama,
+            'email' => $pengguna->alamat_email,
+            'password' => $input['password'] ?? $user->password,
+
+            // 'pengguna_id' => $pengguna->id,
+            // 'name' => $pengguna->nama,
+            // 'email' => $pengguna->alamat_email,
+            // 'password' => Hash::make($input['password'])
+        ]);
+
+        $user->assignRole($request->input('roles'));
 
         return redirect()->route('penggunas.index')->with('message', 'update data pengguna berhasil');
     }
@@ -176,8 +207,8 @@ class PenggunaController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $pengguna = $user->pengguna; 
-        
+        $pengguna = $user->pengguna;
+
         $user->delete();
         $pengguna->delete();
 

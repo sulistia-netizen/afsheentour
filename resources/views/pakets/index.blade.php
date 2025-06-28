@@ -5,25 +5,26 @@
         <div class="card mt-5">
             <h3 class="card-header p-3">Table Pakets</h3>
             <div class="card-body">
-                <a href="{{ route('pakets.create') }}" class="btn btn-success mb-3">Create Paket</a>
-
+                @can('paket-create')
+                    <a href="{{ route('pakets.create') }}" class="btn btn-success mb-3">Create Paket</a>
+                @endcan
                 <!-- Wrapper untuk scroll horizontal -->
                 <div class="table-responsive">
                     <table class="table table-bordered data-table nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>nama</th>
-                                <th>deskripsi</th>
-                                <th>jumlah_orang</th>
-                                <th>harga</th>
-                                <th>durasi</th>
-                                <th>gambar</th>
+                                <th>Nama</th>
+                                <th>Deskripsi</th>
+                                <th>Jumlah Orang</th>
+                                <th>Harga</th>
+                                <th>Durasi</th>
+                                <th>Gambar</th>
                                 <th>is_ai</th>
-                                <th>id_hotel</th>
-                                <th>id_transportasi</th>
-                                <th>tanggal_mulai</th>
-                                <th>tanggal_selesai</th>
+                                <th>ID Hotel</th>
+                                <th>ID Transportasi</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>

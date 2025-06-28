@@ -5,16 +5,25 @@
             <div class="main-menu-header">
                 <img class="img-80 img-radius" src="/admin/assets/images/image-login.png" alt="User-Profile-Image">
                 <div class="user-details">
-                    <span id="more-details">Admin<i class="fa fa-caret-down"></i></span>
+                    <span id="more-details">{{ Auth::user()->name }} <i class="fa fa-caret-down"></i></span>
                 </div>
             </div>
 
             <div class="main-menu-content">
                 <ul>
                     <li class="more-details">
-                        <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                        <a href="#!"><i class="ti-settings"></i>Settings</a>
-                        <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                       
+                        <a href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="ti-layout-sidebar-left"></i> Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+
+
                     </li>
                 </ul>
             </div>
@@ -40,7 +49,14 @@
             </li>
 
             @php
-                $componentsActive = request()->is('destinasis*') || request()->is('pakets*') || request()->is('detail_pakets*') || request()->is('transportasis*') || request()->is('bookings*') || request()->is('pembayarans*') || request()->is('ulasans*');
+                $componentsActive =
+                    request()->is('destinasis*') ||
+                    request()->is('pakets*') ||
+                    request()->is('detail_pakets*') ||
+                    request()->is('transportasis*') ||
+                    request()->is('bookings*') ||
+                    request()->is('pembayarans*') ||
+                    request()->is('ulasans*');
             @endphp
             <li class="pcoded-hasmenu {{ $componentsActive ? 'pcoded-trigger active' : '' }}">
                 <a href="#" class="waves-effect waves-dark">
@@ -49,36 +65,65 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
-                    <li class="{{ request()->routeIs('destinasis.index') ? 'active' : '' }}">
-                        <a href="{{ route('destinasis.index') }}" class="waves-effect waves-dark">Destinasi</a>
-                    </li>
-                    <li class="{{ request()->routeIs('pakets.index') ? 'active' : '' }}">
-                        <a href="{{ route('pakets.index') }}" class="waves-effect waves-dark">Paket</a>
-                    </li>
-                    <li class="{{ request()->routeIs('detail_pakets.index') ? 'active' : '' }}">
-                        <a href="{{ route('detail_pakets.index') }}" class="waves-effect waves-dark">Detail Paket</a>
-                    </li>
-                    <li class="{{ request()->routeIs('transportasis.index') ? 'active' : '' }}">
-                        <a href="{{ route('transportasis.index') }}" class="waves-effect waves-dark">Transportasi</a>
-                    </li>
-                    <li class="{{ request()->routeIs('hotels.index') ? 'active' : '' }}">
-                        <a href="{{ route('hotels.index') }}" class="waves-effect waves-dark">Hotel</a>
-                    </li>
-                    <li class="{{ request()->routeIs('bookings.index') ? 'active' : '' }}">
-                        <a href="{{ route('bookings.index') }}" class="waves-effect waves-dark">Booking</a>
-                    </li>
-                    <li class="{{ request()->routeIs('pembayarans.index') ? 'active' : '' }}">
-                        <a href="{{ route('pembayarans.index') }}" class="waves-effect waves-dark">Pembayaran</a>
-                    </li>
-                    <li class="{{ request()->routeIs('ulasans.index') ? 'active' : '' }}">
-                        <a href="{{ route('ulasans.index') }}" class="waves-effect waves-dark">Ulasan</a>
-                    </li>
-                    <li class="{{ request()->routeIs('penggunas.index') ? 'active' : '' }}">
-                        <a href="{{ route('penggunas.index') }}" class="waves-effect waves-dark">Pengguna</a>
-                    </li>
-                    <li class="{{ request()->routeIs('roles.index') ? 'active' : '' }}">
-                        <a href="{{ route('roles.index') }}" class="waves-effect waves-dark">Role</a>
-                    </li>
+                    @can('destinasi-list')
+                        <li class="{{ request()->routeIs('destinasis.index') ? 'active' : '' }}">
+                            <a href="{{ route('destinasis.index') }}" class="waves-effect waves-dark">Destinasi</a>
+                        </li>
+                    @endcan
+
+                    @can('paket-list')
+                        <li class="{{ request()->routeIs('pakets.index') ? 'active' : '' }}">
+                            <a href="{{ route('pakets.index') }}" class="waves-effect waves-dark">Paket</a>
+                        </li>
+                    @endcan
+
+                    @can('detail_paket-list')
+                        <li class="{{ request()->routeIs('detail_pakets.index') ? 'active' : '' }}">
+                            <a href="{{ route('detail_pakets.index') }}" class="waves-effect waves-dark">Detail Paket</a>
+                        </li>
+                    @endcan
+
+                    @can('transportasi-list')
+                        <li class="{{ request()->routeIs('transportasis.index') ? 'active' : '' }}">
+                            <a href="{{ route('transportasis.index') }}" class="waves-effect waves-dark">Transportasi</a>
+                        </li>
+                    @endcan
+
+                    @can('hotel-list')
+                        <li class="{{ request()->routeIs('hotels.index') ? 'active' : '' }}">
+                            <a href="{{ route('hotels.index') }}" class="waves-effect waves-dark">Hotel</a>
+                        </li>
+                    @endcan
+
+                    @can('booking-list')
+                        <li class="{{ request()->routeIs('bookings.index') ? 'active' : '' }}">
+                            <a href="{{ route('bookings.index') }}" class="waves-effect waves-dark">Booking</a>
+                        </li>
+                    @endcan
+
+                    @can('pembayaran-list')
+                        <li class="{{ request()->routeIs('pembayarans.index') ? 'active' : '' }}">
+                            <a href="{{ route('pembayarans.index') }}" class="waves-effect waves-dark">Pembayaran</a>
+                        </li>
+                    @endcan
+
+                    @can('ulasan-list')
+                        <li class="{{ request()->routeIs('ulasans.index') ? 'active' : '' }}">
+                            <a href="{{ route('ulasans.index') }}" class="waves-effect waves-dark">Ulasan</a>
+                        </li>
+                    @endcan
+
+                    @can('pengguna-list')
+                        <li class="{{ request()->routeIs('penggunas.index') ? 'active' : '' }}">
+                            <a href="{{ route('penggunas.index') }}" class="waves-effect waves-dark">Pengguna</a>
+                        </li>
+                    @endcan
+
+                    @can('role-list')
+                        <li class="{{ request()->routeIs('roles.index') ? 'active' : '' }}">
+                            <a href="{{ route('roles.index') }}" class="waves-effect waves-dark">Role</a>
+                        </li>
+                    @endcan
                 </ul>
             </li>
         </ul>

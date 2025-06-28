@@ -11,12 +11,13 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Nama Hotel:</strong>
-            {{ $hotel->nama hotel }}
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Nama Hotel:</strong>
+                {{ $hotel->nama_hotel }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -24,6 +25,7 @@
                 {{ $hotel->latitude }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -31,6 +33,7 @@
                 {{ $hotel->longitude }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -38,6 +41,7 @@
                 {{ $hotel->harga }}
             </div>
         </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
