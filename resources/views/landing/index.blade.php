@@ -214,7 +214,7 @@
                                     <div class="mb-3 mb-md-0">
                                         <input type="number" class="form-control p-4 datetimepicker-input"
                                             placeholder="Jumlah Orang " name="jumlah_orang" data-target="#date2"
-                                            data-toggle="datetimepicker" />
+                                            data-toggle="datetimepicker" required/>
 
                                     </div>
                                 </div>

@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Helper;
 
+
 class AuthController extends Controller
 {
     /**

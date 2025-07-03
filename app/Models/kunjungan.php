@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kunjungan extends Model
 {
-    protected $guarded = ['id'];
+    protected $table = 'kunjungans'; // sesuaikan dengan nama tabel di database
+    protected $fillable = ['ip_address']; // sesuaikan dengan kolom yang dipakai
 }
+
