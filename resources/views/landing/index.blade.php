@@ -197,7 +197,7 @@
                                     <div class="mb-3 mb-md-0">
                                         <div class="date" id="date1" data-target-input="nearest">
                                             <input type="date" class="form-control p-4 datetimepicker-input"
-                                                name="tanggal_selesai" />
+                                                name="tanggal_selesai" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@
                                         <div class="date" id="date2" data-target-input="nearest">
                                             <input type="number" class="form-control p-4 datetimepicker-input"
                                                 placeholder="Budget/Orang " name="budget" data-target="#date2"
-                                                data-toggle="datetimepicker" />
+                                                data-toggle="datetimepicker" required/>
                                         </div>
                                     </div>
                                 </div>
