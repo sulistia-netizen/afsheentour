@@ -202,7 +202,10 @@ class AuthController extends Controller
 
     public function hasil(Request $request)
     {
-        $user = Auth::user()->load('pengguna');
+        $user = Auth::user() ?? "";
+        if(Auth::check()){
+            $user = Auth::user()->load('pengguna');
+        }
 
         $data_tempat_wisata = Destinasi::all();
         // dd($data_tempat_wisata);

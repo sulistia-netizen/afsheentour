@@ -323,7 +323,7 @@
             </a>
 
             <!-- Tombol Pesan Sekarang -->
-            @if (Auth::check())
+            @if ($user)
                 <!-- Jika sudah login, buka modal form pemesanan -->
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPemesanan">
                     <i class="bi bi-cart-plus me-1"></i> Pesan Sekarang
@@ -339,7 +339,8 @@
 
 
         <!-- Modal Form Pemesan -->
-        <div class="modal fade" id="modalPemesanan" tabindex="-1" aria-labelledby="modalPemesananLabel"
+        @if ($user)
+            <div class="modal fade" id="modalPemesanan" tabindex="-1" aria-labelledby="modalPemesananLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content shadow">
@@ -393,6 +394,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <!-- Modal Harus Login -->
         <div class="modal fade" id="modalHarusLogin" tabindex="-1" aria-labelledby="modalHarusLoginLabel"
