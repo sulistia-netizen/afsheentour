@@ -32,6 +32,7 @@
                     <p><strong>🧍 Jumlah Orang:</strong> {{ optional($paket->paket)->jumlah_orang ?? '-' }} orang</p>
 
                     <div class="text-center mt-4">
+                        
                         <a href="{{ route('pembayaran.transfer', $paket->id) }}" class="btn btn-primary btn-lg px-4 py-2 shadow-sm">
                             <i class="bi bi-cart-plus-fill me-2"></i>Pesan Sekarang</a>
                     </div>

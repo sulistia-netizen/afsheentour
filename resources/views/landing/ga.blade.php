@@ -27,7 +27,7 @@
             border-radius: 8px;
             margin-bottom: 40px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid #1b4332;
+            border-left: 5px solid #1b4332; /* Keep your existing border-left */
         }
 
         .section-header h2 {
@@ -67,17 +67,22 @@
             margin-right: 8px;
         }
 
+        /* --- New/Modified styles for Itinerary --- */
         .itinerary-section {
             margin-top: 30px;
         }
 
         .day-header {
-            background-color: #d8f3dc;
-            color: #1b4332;
+            /* Changed to green background and white text */
+            background-color: #52b788; /* A shade of green */
+            color: #fff; /* White text for better contrast */
             padding: 15px 20px;
             border-radius: 6px;
             margin-bottom: 15px;
-            border-left: 3px solid #1b4332;
+            border-left: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
         }
 
         .day-header h5 {
@@ -85,6 +90,13 @@
             font-weight: 600;
             margin-bottom: 0;
         }
+        
+        .day-header i {
+            margin-right: 10px;
+            font-size: 1.25rem;
+            color: #fff; /* White icon to match text */
+        }
+
 
         .activity-item {
             background-color: #fff;
@@ -92,26 +104,33 @@
             border-radius: 6px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             margin-bottom: 10px;
-            border-left: 2px solid #52b788;
+            border-left: none;
+            /* Removed display: flex to stack elements */
+            /* gap: 10px; removed */
         }
 
         .activity-item h6 {
             font-size: 1rem;
             font-weight: 500;
             color: #1b4332;
-            margin-bottom: 5px;
-        }
-
-        .activity-item p {
-            font-size: 0.9rem;
-            color: #2f3e46;
+            margin-bottom: 5px; /* Add margin to separate from time */
         }
 
         .activity-item .time {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #6c757d;
-            font-style: italic;
+            font-style: normal;
+            /* margin-left: auto; removed */
+            display: block; /* Ensure it takes full width and goes to new line */
         }
+
+        .activity-item .time i {
+            color: #6c757d; /* Grey clock icon */
+            font-size: 1.1rem;
+            margin-right: 5px; /* Small margin between icon and time text */
+        }
+        /* --- End New/Modified styles for Itinerary --- */
+
 
         .btn-order {
             background-color: #1b4332;
@@ -148,60 +167,28 @@
             border-color: #2d6a4f;
         }
 
-        .timeline-vertical {
-            border-left: 4px solid #52b788;
-            margin: 40px 0;
-            padding-left: 20px;
-            position: relative;
+        /* Original timeline-vertical and its items are replaced below */
+        .timeline-vertical, .timeline-item-vertical {
+            display: none; /* Hide the old timeline structure */
+        }
+        .text-success.mb-4.fw-bold {
+            display: none; /* Hide the Rangkaian Perjalanan header */
         }
 
-        .timeline-item-vertical {
-            position: relative;
-            margin-bottom: 30px;
-            padding-left: 20px;
-        }
-
-        .timeline-item-vertical::before {
-            content: '';
-            position: absolute;
-            left: -12px;
-            top: 8px;
-            width: 16px;
-            height: 16px;
-            background-color: #2d6a4f;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px #52b788;
-        }
-
-        .timeline-date-badge {
-            background-color: #2d6a4f;
-            color: white;
-            padding: 4px 12px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-block;
-            border-radius: 20px;
-            margin-bottom: 8px;
-        }
-
-        .timeline-title {
-            font-size: 1rem;
+        .detail-perjalanan-header {
+            font-size: 1.5rem;
             font-weight: 600;
+            color: #1b4332; /* Dark green */
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        .detail-perjalanan-header i {
+            margin-right: 10px;
+            font-size: 1.8rem;
             color: #1b4332;
-            margin-bottom: 4px;
         }
 
-        .timeline-time {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-bottom: 4px;
-        }
-
-        .timeline-desc {
-            font-size: 0.9rem;
-            color: #344e41;
-        }
     </style>
 </head>
 
@@ -244,34 +231,29 @@
             </div>
         </div>
 
-        <div class="timeline-vertical">
-            <h4 class="text-success mb-4 fw-bold">
-                <i class="bi bi-clock-history me-2"></i> Rangkaian Perjalanan
+        <div class="itinerary-section">
+            <h4 class="detail-perjalanan-header">
+                <i class="bi bi-list"></i> Detail Perjalanan
             </h4>
 
-            @foreach ($paket->detail_paket->sortBy(['hari_ke', 'jam_mulai']) as $dp)
-                <div
-                    class="timeline-item-vertical mb-4 p-3 border-start border-3 border-success bg-light rounded shadow-sm">
-                    <div class="timeline-date-badge fw-bold text-light mb-1">
-                        Hari ke-{{ $dp->hari_ke }}
-                    </div>
+            @php
+                $groupedDetails = $paket->detail_paket->sortBy(['hari_ke', 'jam_mulai'])->groupBy('hari_ke');
+            @endphp
 
-                    <div class="timeline-title h5 text-dark mb-2">
-                        <i class="bi bi-geo-alt-fill me-1 text-success"></i>
-                        {{ $dp->destinasi?->nama ?? 'Destinasi Wisata' }}
-                    </div>
-
-                    <div class="timeline-time mb-2 text-muted">
-                        <i class="bi bi-clock me-1"></i>
-                        {{ $dp->jam_mulai }} - {{ $dp->jam_selesai }}
-                    </div>
+            @foreach ($groupedDetails as $hari_ke => $details_per_day)
+                <div class="day-header mb-3">
+                    <i class="bi bi-calendar-day-fill"></i>
+                    <h5>Hari ke-{{ $hari_ke }}</h5>
                 </div>
+                @foreach ($details_per_day as $dp)
+                    <div class="activity-item mb-2">
+                        <h6>{{ $dp->destinasi?->nama ?? 'Destinasi Wisata' }}</h6>
+                        <span class="time"><i class="bi bi-clock"></i> {{ $dp->jam_mulai }} - {{ $dp->jam_selesai }}</span>
+                    </div>
+                @endforeach
             @endforeach
         </div>
-
-
-
-        {{-- Form Pemesanan --}}
+        {{-- Form Pemesanan - commented out as in original --}}
         {{-- <div class="card mt-5 shadow" style="max-width: 700px; margin: 0 auto;">
             <div class="card-body">
                 <h4 class="card-title text-center mb-4 text-success">
@@ -315,21 +297,16 @@
             </div>
         </div> --}}
 
-        <!-- Tombol Back ke Dashboard dan Pesan Sekarang -->
-        <div class="d-flex gap-2">
-            <!-- Tombol Back ke Dashboard -->
+        <div class="d-flex gap-2 mt-4">
             <a href="{{ route('landing') }}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-1"></i> Kembali ke Dashboard
             </a>
 
-            <!-- Tombol Pesan Sekarang -->
             @if ($user)
-                <!-- Jika sudah login, buka modal form pemesanan -->
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPemesanan">
                     <i class="bi bi-cart-plus me-1"></i> Pesan Sekarang
                 </button>
             @else
-                <!-- Jika belum login, buka modal notifikasi login -->
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalHarusLogin">
                     <i class="bi bi-cart-plus me-1"></i> Pesan Sekarang
                 </button>
@@ -338,65 +315,65 @@
 
 
 
-        <!-- Modal Form Pemesan -->
         @if ($user)
             <div class="modal fade" id="modalPemesanan" tabindex="-1" aria-labelledby="modalPemesananLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content shadow">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="modalPemesananLabel">
-                            <i class="bi bi-person-lines-fill me-2"></i> Data Pemesan
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('pembayaran.transfer', $paket->id) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="id_paket" value="{{ $paket->id }}">
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content shadow">
+                        <div class="modal-header bg-success text-white">
+                            <h5 class="modal-title" id="modalPemesananLabel">
+                                <i class="bi bi-person-lines-fill me-2"></i> Data Pemesan
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Tutup"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('pembayaran.transfer', $paket->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id_paket" value="{{ $paket->id }}">
 
-                            <div class="mb-3">
-                                <label for="nama" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="nama" name="nama"
-                                    placeholder="Masukkan nama lengkap" value="{{ $user->name }}" readonly required>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="nama" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="nama" name="nama"
+                                        placeholder="Masukkan nama lengkap" value="{{ $user->name }}" readonly
+                                        required>
+                                </div>
 
-                            <div class="mb-3">
-                                <label for="jenis_kelamin" class="form-label">Pengguna</label>
-                                <input type="text" class="form-control" id="jenis_kelamin" name="jenis_kelamin"
-                                    placeholder="Masukkan jenis kelamin" value="{{ $user->pengguna->jenis_kelamin }}"
-                                    readonly required>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="jenis_kelamin" class="form-label">Pengguna</label>
+                                    <input type="text" class="form-control" id="jenis_kelamin" name="jenis_kelamin"
+                                        placeholder="Masukkan jenis kelamin"
+                                        value="{{ $user->pengguna->jenis_kelamin }}" readonly required>
+                                </div>
 
-                            <div class="mb-3">
-                                <label for="nomor_hp" class="form-label">Nomor HP</label>
-                                <input type="tel" class="form-control" id="nomor_hp" name="nomor_hp"
-                                    placeholder="08xxxxxxxxxx" value="{{ $user->pengguna->nomor_hp }}" readonly
-                                    required>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="nomor_hp" class="form-label">Nomor HP</label>
+                                    <input type="tel" class="form-control" id="nomor_hp" name="nomor_hp"
+                                        placeholder="08xxxxxxxxxx" value="{{ $user->pengguna->nomor_hp }}" readonly
+                                        required>
+                                </div>
 
-                            <div class="mb-3">
-                                <label for="alamat_email" class="form-label">Alamat Email</label>
-                                <input type="email" class="form-control" id="alamat_email" name="alamat_email"
-                                    placeholder="contoh@email.com" value="{{ $user->pengguna->alamat_email }}"
-                                    readonly required>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="alamat_email" class="form-label">Alamat Email</label>
+                                    <input type="email" class="form-control" id="alamat_email" name="alamat_email"
+                                        placeholder="contoh@email.com" value="{{ $user->pengguna->alamat_email }}"
+                                        readonly required>
+                                </div>
 
-                            <div class="modal-footer p-0 pt-3">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-success">
-                                    <i class="bi bi-check-circle me-1"></i> Lanjut ke Pembayaran
-                                </button>
-                            </div>
-                        </form>
+                                <div class="modal-footer p-0 pt-3">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bi bi-check-circle me-1"></i> Lanjut ke Pembayaran
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endif
 
-        <!-- Modal Harus Login -->
         <div class="modal fade" id="modalHarusLogin" tabindex="-1" aria-labelledby="modalHarusLoginLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -418,8 +395,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </div>
 

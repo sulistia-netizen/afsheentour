@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -198,7 +197,7 @@
                                     <div class="mb-3 mb-md-0">
                                         <div class="date" id="date1" data-target-input="nearest">
                                             <input type="date" class="form-control p-4 datetimepicker-input"
-                                                name="tanggal_selesai" required/>
+                                                name="tanggal_selesai" required />
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +206,7 @@
                                         <div class="date" id="date2" data-target-input="nearest">
                                             <input type="number" class="form-control p-4 datetimepicker-input"
                                                 placeholder="Budget/Orang " name="budget" data-target="#date2"
-                                                data-toggle="datetimepicker" required/>
+                                                data-toggle="datetimepicker" required />
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +214,7 @@
                                     <div class="mb-3 mb-md-0">
                                         <input type="number" class="form-control p-4 datetimepicker-input"
                                             placeholder="Jumlah Orang " name="jumlah_orang" data-target="#date2"
-                                            data-toggle="datetimepicker" required/>
+                                            data-toggle="datetimepicker" required />
 
                                     </div>
                                 </div>
@@ -427,46 +426,64 @@
 
             <!-- Registration Start -->
             <div class="container-fluid py-5"
-                style="margin: 90px 0;background-image: url('{{ url('free_travel/img/poto03.jpeg') }}'); background-size: cover; background-position: center;">
-                <div class="container py-5">
+                style="margin: 90px 0; position: relative; background-image: url('{{ url('free_travel/img/poto03.jpeg') }}'); background-size: cover; background-position: center;">
+                <!-- Overlay gelap transparan -->
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1;">
+                </div>
+
+                <!-- Konten utama -->
+                <div class="container py-5" style="position: relative; z-index: 2;">
                     <div class="row align-items-center">
                         <div class="col-lg-7 mb-5 mb-lg-0">
                             <div class="mb-4">
-                                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;"> SAATNYA
-                                    LIBURAN!</h6>
-                                <h1 class="text-white"><span class="text-primary">Liburan Anti Ribet </span> Semua
-                                    Sudah Kami Siapkan untuk Anda!</h1>
+                                <h6 class="text-uppercase"
+                                    style="letter-spacing: 5px; color: #27ae60; text-shadow: 1px 1px 2px rgba(0,0,0,0.6);">
+                                    SAATNYA LIBURAN!
+                                </h6>
+                                <h1 style="color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+                                    <span style="color: #2ecc71;">Liburan Anti Ribet </span> Semua Sudah Kami Siapkan
+                                    untuk Anda!
+                                </h1>
                             </div>
-                            <p class="text-white">Nikmati keindahan alam yang menakjubkan – dari pantai pasir
-                                putih, pulau eksotis, hingga pesona alam liar Way Kambas. Rasakan momen romantis
-                                bersama pasangan dengan suasana yang tenang dan pemandangan yang memukau.</p>
-                            <ul class="list-inline text-white m-0">
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Paket lengkap
-                                    hotel, transportasi, dan tour guide</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Kunjungi Pahawang,
-                                    Tegal Mas, dan Air Terjun indah</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Cocok untuk
-                                    liburan sahabt ataupun keluarga</li>
+                            <p style="color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.6);">
+                                Nikmati keindahan alam yang menakjubkan – dari pantai pasir putih, pulau eksotis, hingga
+                                pesona alam liar Way Kambas. Rasakan momen romantis bersama pasangan dengan suasana yang
+                                tenang dan pemandangan yang memukau.
+                            </p>
+                            <ul class="list-inline m-0"
+                                style="color: #ffffff; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+                                <li class="py-2">
+                                    <i class="fa fa-check text-primary mr-3"></i>Paket lengkap hotel, transportasi, dan
+                                    tour guide
+                                </li>
+                                <li class="py-2">
+                                    <i class="fa fa-check text-primary mr-3"></i>Kunjungi Pahawang, Tegal Mas, dan Air
+                                    Terjun indah
+                                </li>
+                                <li class="py-2">
+                                    <i class="fa fa-check text-primary mr-3"></i>Cocok untuk liburan sahabt ataupun
+                                    keluarga
+                                </li>
                             </ul>
                         </div>
-
-
                     </div>
-                    </form>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    <!-- Registration End -->
 
-    <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="text-center mb-3 pb-3">
-                <h6 id="testimonial" class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimonial</h6>
-                <h1>What Say Our Clients</h1>
+            <!-- Registration End -->
+
+            <!-- Testimonial Start -->
+            <div class="container-fluid py-5">
+                <div class="container py-5">
+                    <div class="text-center mb-3 pb-3">
+                        <a href="{{ route('testimonial.index') }}" style="text-decoration: none;">
+                            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px; cursor: pointer;">
+                                Testimonial</h6>
+                        </a>
+                        <h1>What Say Our Clients</h1>
+                    </div>
+                </div>
             </div>
             <div class="owl-carousel testimonial-carousel">
                 <div class="text-center pb-4">
@@ -514,186 +531,186 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
+
+            <!-- Testimonial End -->
 
 
-    <!-- Blog Start -->
-    <div class="container-fluid py-5">
-        <div class="container pt-5 pb-3">
-            <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our Blog</h6>
-                <h1>Latest From Our Blog</h1>
-            </div>
-            <div class="row pb-3">
-                <div class="col-lg-4 col-md-6 mb-4 pb-2">
-                    <div class="blog-item">
-                        <div class="position-relative">
-                            <img class="img-fluid w-100" src="/free_travel/img/blog-1.jpg" alt="">
-                            <div class="blog-date">
-                                <h6 class="font-weight-bold mb-n1">01</h6>
-                                <small class="text-white text-uppercase">Jan</small>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4">
-                            <div class="d-flex mb-2">
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Admin</a>
-                                <span class="text-primary px-2">|</span>
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Tours &
-                                    Travel</a>
-                            </div>
-                            <a class="h5 m-0 text-decoration-none" href="">Dolor justo sea kasd lorem clita
-                                justo diam amet</a>
-                        </div>
+            <!-- Blog Start -->
+            <div class="container-fluid py-5">
+                <div class="container pt-5 pb-3">
+                    <div class="text-center mb-3 pb-3">
+                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our Blog</h6>
+                        <h1>Latest From Our Blog</h1>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 pb-2">
-                    <div class="blog-item">
-                        <div class="position-relative">
-                            <img class="img-fluid w-100" src="/free_travel/img/blog-2.jpg" alt="">
-                            <div class="blog-date">
-                                <h6 class="font-weight-bold mb-n1">01</h6>
-                                <small class="text-white text-uppercase">Jan</small>
+                    <div class="row pb-3">
+                        <div class="col-lg-4 col-md-6 mb-4 pb-2">
+                            <div class="blog-item">
+                                <div class="position-relative">
+                                    <img class="img-fluid w-100" src="/free_travel/img/teluk_hantu.jpg"
+                                        alt="">
+                                    <div class="blog-date">
+                                        <h6 class="font-weight-bold mb-n1">01</h6>
+                                        <small class="text-white text-uppercase">Jan</small>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4">
+                                    <div class="d-flex mb-2">
+                                        <a class="text-primary text-uppercase text-decoration-none"
+                                            href="">Admin</a>
+                                        <span class="text-primary px-2">|</span>
+                                        <a class="text-primary text-uppercase text-decoration-none"
+                                            href="">Tours &
+                                            Travel</a>
+                                    </div>
+                                    <a class="h5 m-0 text-decoration-none" href="">Perjalanan selama liburan
+                                        yang menyenangkan</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="bg-white p-4">
-                            <div class="d-flex mb-2">
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Admin</a>
-                                <span class="text-primary px-2">|</span>
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Tours &
-                                    Travel</a>
+                        <div class="col-lg-4 col-md-6 mb-4 pb-2">
+                            <div class="blog-item">
+                                <div class="position-relative">
+                                    <img class="img-fluid w-100" src="/free_travel/img/curug-gangsa.jpg"
+                                        alt="">
+                                    <div class="blog-date">
+                                        <h6 class="font-weight-bold mb-n1">01</h6>
+                                        <small class="text-white text-uppercase">Feb</small>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4">
+                                    <div class="d-flex mb-2">
+                                        <a class="text-primary text-uppercase text-decoration-none"
+                                            href="">Admin</a>
+                                        <span class="text-primary px-2">|</span>
+                                        <a class="text-primary text-uppercase text-decoration-none"
+                                            href="">Tours &
+                                            Travel</a>
+                                    </div>
+                                    <a class="h5 m-0 text-decoration-none" href="">Perjalanan selama liburan
+                                        yang menyenangkan</a>
+                                </div>
                             </div>
-                            <a class="h5 m-0 text-decoration-none" href="">Dolor justo sea kasd lorem clita
-                                justo diam amet</a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 pb-2">
-                    <div class="blog-item">
-                        <div class="position-relative">
-                            <img class="img-fluid w-100" src="/free_travel/img/blog-3.jpg" alt="">
-                            <div class="blog-date">
-                                <h6 class="font-weight-bold mb-n1">01</h6>
-                                <small class="text-white text-uppercase">Jan</small>
+                        <div class="col-lg-4 col-md-6 mb-4 pb-2">
+                            <div class="blog-item">
+                                <div class="position-relative">
+                                    <img class="img-fluid w-100" src="/free_travel/img/pulau wayang.jpg"
+                                        alt="">
+                                    <div class="blog-date">
+                                        <h6 class="font-weight-bold mb-n1">01</h6>
+                                        <small class="text-white text-uppercase">Apr</small>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4">
+                                    <div class="d-flex mb-2">
+                                        <a class="text-primary text-uppercase text-decoration-none"
+                                            href="">Admin</a>
+                                        <span class="text-primary px-2">|</span>
+                                        <a class="text-primary text-uppercase text-decoration-none"
+                                            href="">Tours &
+                                            Travel</a>
+                                    </div>
+                                    <a class="h5 m-0 text-decoration-none" href="">Perjalanan selama liburan
+                                        yang menyenangkan</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="bg-white p-4">
-                            <div class="d-flex mb-2">
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Admin</a>
-                                <span class="text-primary px-2">|</span>
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Tours &
-                                    Travel</a>
-                            </div>
-                            <a class="h5 m-0 text-decoration-none" href="">Dolor justo sea kasd lorem clita
-                                justo diam amet</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Blog End -->
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
-        <div class="row pt-5">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <a href="" class="navbar-brand">
-                    <h1 id="afsheen-tour" class="text-primary"><span class="text-white">AFSHEEN</span>TOUR</h1>
-                </a>
-                <p>Nikmati keindahan alam yang memukau, tempat sempurna untuk berlibur dan melepas penat dari kesibukan
-                    sehari-hari</p>
-                <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Follow Us</h6>
-                <div class="d-flex justify-content-start">
-                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Our Services</h5>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Destinasi</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Layanan</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Paket</a>
-                    <a class="text-white-50 mb-2" href="{{ route('testimonial.index') }}"><i
-                            class="fa fa-angle-right mr-2"></i>Testimonial</a>
-
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Usefull Links</h5>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Destinasi</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Layanan</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Paket</a>
-                    <a class="text-white-50 mb-2" href="{{ route('testimonial.index') }}"><i
-                            class="fa fa-angle-right mr-2"></i>Testimonial</a>
-
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Contact Us</h5>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
-                <p><i class="fa fa-phone-alt mr-2"></i>+62 857 8301 2544</p>
-                <p><i class="fa fa-envelope mr-2"></i>afsheentour14@gmail.com</p>
-                <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Newsletter</h6>
-                <div class="w-100">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 25px;"
-                            placeholder="Your Email">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary px-3">Sign Up</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
-        style="border-color: rgba(256, 256, 256, .1) !important;">
-        <div class="row">
-            <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-                <p class="m-0 text-white-50">Copyright &copy; <a href="#">Domain</a>. All Rights Reserved.</a>
-                </p>
+            <!-- Blog End -->
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
+                <div class="row pt-5 justify-content-between">
+                    <!-- Brand & Description -->
+                    <div class="col-lg-4 col-md-6 mb-5">
+                        <a href="#" class="navbar-brand">
+                            <h1 id="afsheen-tour" class="text-primary mb-3">
+                                <span class="text-white">AFSHEEN</span><span class="text-success">TOUR</span>
+                            </h1>
+                        </a>
+                        <p class="text-white-50">
+                            Nikmati keindahan alam yang memukau, tempat sempurna untuk berlibur dan melepas penat dari
+                            kesibukan sehari-hari
+                        </p>
+                        <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Follow Us</h6>
+                        <div class="d-flex">
+                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-square" href="#"><i
+                                    class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Our Services -->
+                    <div class="col-lg-3 col-md-6 mb-5">
+                        <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Our Services</h5>
+                        <div class="d-flex flex-column">
+                            <a class="text-white-50 mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>About</a>
+                            <a class="text-white-50 mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Destinasi</a>
+                            <a class="text-white-50 mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Layanan</a>
+                            <a class="text-white-50 mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Paket</a>
+                            <a class="text-white-50 mb-2" href="{{ route('testimonial.index') }}"><i
+                                    class="fa fa-angle-right mr-2"></i>Testimonial</a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="col-lg-4 col-md-6 mb-5">
+                        <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Contact Us</h5>
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>Palembang, Indonesia</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>+62 857 8301 2544</p>
+                        <p><i class="fa fa-envelope mr-2"></i>afsheentour14@gmail.com</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6 text-center text-md-right">
-                <p class="m-0 text-white-50">Designed by <a href="https://htmlcodex.com">HTML Codex</a>
-                </p>
+
+            <!-- Footer Bottom -->
+            <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
+                style="border-color: rgba(256, 256, 256, .1) !important;">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+                        <p class="m-0 text-white-50">&copy; <a href="#">Domain</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-lg-6 text-center text-md-right">
+                        <p class="m-0 text-white-50">Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <!-- Footer End -->
+            <!-- Footer End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-            class="fa fa-angle-double-up"></i></a>
+
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+                    class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="/free_travel/https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="/free_travel/https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="free_travel/lib/easing/easing.min.js"></script>
-    <script src="/free_travel/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="/free_travel/lib/tempusdominus/js/moment.min.js"></script>
-    <script src="/free_travel/lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="/free_travel/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <!-- JavaScript Libraries -->
+            <script src="/free_travel/https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="/free_travel/https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+            <script src="free_travel/lib/easing/easing.min.js"></script>
+            <script src="/free_travel/lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="/free_travel/lib/tempusdominus/js/moment.min.js"></script>
+            <script src="/free_travel/lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="/free_travel/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="/free_travel/mail/jqBootstrapValidation.min.js"></script>
-    <script src="/free_travel/mail/contact.js"></script>
+            <!-- Contact Javascript File -->
+            <script src="/free_travel/mail/jqBootstrapValidation.min.js"></script>
+            <script src="/free_travel/mail/contact.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="/free_travel/js/main.js"></script>
+            <!-- Template Javascript -->
+            <script src="/free_travel/js/main.js"></script>
 </body>
 
 </html>
